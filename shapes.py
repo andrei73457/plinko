@@ -5,7 +5,7 @@ pymunk.pygame_util.positive_y_is_up = False
 
 
 RES = WIDTH, HEIGHT = 1200,750
-ball_mass, ball_radius = 1, 7
+ball_mass, ball_radius = 1, 10
 segment_thickness = 2
 x1, x4 = 10, WIDTH - 10
 y1 = 100
@@ -13,10 +13,10 @@ y1 = 100
 def create_ball(space):
     ball_moment = pymunk.moment_for_circle(ball_mass, 0, ball_radius)
     ball_body = pymunk.Body(ball_mass, ball_moment)
-    ball_body.position = randrange(WIDTH//2 -5, WIDTH//2 +5), 30
+    ball_body.position = randrange(WIDTH//2 -30, WIDTH//2 +30), 30
     ball_shape = pymunk.Circle(ball_body, ball_radius)
-    ball_shape.elasticity = .5
-    ball_shape.friction = 0.5
+    ball_shape.elasticity = .4
+    ball_shape.friction = 1
     space.add(ball_body, ball_shape)
     return ball_body
 
@@ -27,10 +27,10 @@ def create_segment(from_, to_, thickness, space, color):
 
 
 def create_peg(x, y, space, color):
-    circle_shape = pymunk.Circle(space.static_body, radius=10, offset=(x, y))
+    circle_shape = pymunk.Circle(space.static_body, radius=7, offset=(x, y))
     circle_shape.color = pg.color.THECOLORS[color]
-    circle_shape.elasticity = 0.1
-    circle_shape.friction = 0.5
+    circle_shape.elasticity = 1
+    circle_shape.friction = 1
     space.add(circle_shape)
 
 
